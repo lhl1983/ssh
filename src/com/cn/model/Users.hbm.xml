@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.cn.model">
+	<class name="Users" table="users" lazy="true" dynamic-update="true">
+		<cache usage="read-write" />
+		<id name="id" column="id">
+			<generator class="identity" />
+		</id>
+		<property name="account" column="account"/>
+		<property name="password" column="password" />
+		<property name="enable" column="enable" />
+
+		<set name="roles" table="users_roles" inverse="true" cascade="all" >
+			<key column="uid"></key>
+			<many-to-many class="Roles" column="rid" />
+		</set>
+	</class>
+</hibernate-mapping>
